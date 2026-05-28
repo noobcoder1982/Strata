@@ -42,7 +42,7 @@ Sleek, low-light aesthetic featuring glowing gradients and ambient dark backdrop
 
 Experience editorial-grade weather precision live in your browser:
 
-[👉 Launch Strata Live](https://strata-meteo.vercel.app)
+[👉 Launch Strata Live](https://strata-beta.vercel.app/)
 
 ---
 

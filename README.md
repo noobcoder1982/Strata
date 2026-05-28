@@ -38,27 +38,21 @@ Sleek, low-light aesthetic featuring glowing gradients and ambient dark backdrop
 
 ---
 
-## 🛠️ Setup & Deployment
+## 🚀 Live Access
 
-### Local Development
-To run the app locally without any server dependencies:
-1. Double-click `index.html` to run directly in the browser, or serve it using any simple local server:
-   ```bash
-   npx serve .
-   ```
-2. The frontend automatically runs in fallback mode, calling OpenWeather directly using the built-in development credentials.
+Experience editorial-grade weather precision live in your browser:
 
-### Deploying to Vercel (Production Setup)
-To host the app with secure API key protection:
-1. Initialize git and push this repository to **GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initialize Strata app"
-   ```
-2. Open your **Vercel Dashboard** and click **Add New > Project**.
-3. Import your GitHub repository.
-4. Under **Environment Variables**, configure your secure production credential:
-   - **Key:** `OPENWEATHER_API_KEY`
-   - **Value:** *[Your OpenWeather API Key]*
-5. Click **Deploy**. Vercel will automatically host the static frontend assets and spin up the backend proxy function in `/api/weather.js` seamlessly.
+[👉 Launch Strata Live](https://strata-meteo.vercel.app)
+
+---
+
+## 🔮 Updates Coming Sooooonnnnn... 🚀
+
+While we wait for the next atmospheric shift, our meteorological supercomputers (and our heavily caffeinated developers) are cooking up some wild updates:
+
+- ⚡ **Lightning Simulator:** For when the weather is too boring and you want to trigger artificial lightning strikes inside your browser window.
+- 🌪️ **Tornado Chaser Mode:** Direct integration with storm chaser dashboard cams so you can feel the rush without the flying cows.
+- 🪐 **Exoplanet Weather Support:** Ever wondered what the humidity is on Mars or Jupiter? We are calibrating interstellar sensors as we speak.
+- 🐑 **Atmospheric Sheep Index:** A highly proprietary metric that accurately calculates how fluffy the cumulus clouds are today.
+
+*Disclaimer: The above updates may or may not violate several laws of thermodynamics. Stay tuned!*

@@ -385,14 +385,118 @@ function setupThemeSwitch() {
     
     function toggleTheme() {
         const isCurrentlyDark = body.classList.contains("dark-mode");
-        if (isCurrentlyDark) {
-            body.classList.remove("dark-mode");
-            body.classList.add("light-mode");
-            localStorage.setItem("dashboard_theme", "light");
+        
+        if (window.innerWidth <= 768) {
+            // Multi-Layered Liquid Wave Transition
+            let container = document.querySelector(".mobile-theme-wave-container");
+            if (!container) {
+                container = document.createElement("div");
+                container.className = "mobile-theme-wave-container";
+                
+                // Create three organic sweeping layers
+                for (let i = 1; i <= 3; i++) {
+                    const wave = document.createElement("div");
+                    wave.className = `mobile-wave wave-${i}`;
+                    container.appendChild(wave);
+                }
+                document.body.appendChild(container);
+            }
+            
+            // Set dynamic classes to select appropriate light/dark themes
+            container.className = "mobile-theme-wave-container " + (isCurrentlyDark ? "wave-to-light" : "wave-to-dark");
+            
+            // Force hardware layout recalculation
+            void container.offsetWidth;
+            
+            // Initiate multi-layered stretch slide down
+            container.classList.add("animating");
+            
+            // Dual-Oscillator Space Swoosh audio synthesis
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Oscillator 1 - Leading Wave Swoop
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                const filter1 = audioCtx.createBiquadFilter();
+                
+                osc1.connect(filter1);
+                filter1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(80, audioCtx.currentTime);
+                osc1.frequency.exponentialRampToValueAtTime(950, audioCtx.currentTime + 0.48);
+                osc1.frequency.exponentialRampToValueAtTime(130, audioCtx.currentTime + 0.85);
+                
+                filter1.type = 'lowpass';
+                filter1.Q.value = 8;
+                filter1.frequency.setValueAtTime(160, audioCtx.currentTime);
+                filter1.frequency.exponentialRampToValueAtTime(1500, audioCtx.currentTime + 0.48);
+                filter1.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.85);
+                
+                gain1.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                gain1.gain.exponentialRampToValueAtTime(0.035, audioCtx.currentTime + 0.35);
+                gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.85);
+                
+                // Oscillator 2 - Trailing Wave Rumbles
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                const filter2 = audioCtx.createBiquadFilter();
+                
+                osc2.connect(filter2);
+                filter2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                osc2.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + 0.85);
+                
+                filter2.type = 'lowpass';
+                filter2.Q.value = 3;
+                filter2.frequency.setValueAtTime(1000, audioCtx.currentTime);
+                filter2.frequency.exponentialRampToValueAtTime(280, audioCtx.currentTime + 0.85);
+                
+                gain2.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                gain2.gain.exponentialRampToValueAtTime(0.015, audioCtx.currentTime + 0.42);
+                gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.85);
+                
+                osc1.start(audioCtx.currentTime);
+                osc1.stop(audioCtx.currentTime + 0.85);
+                osc2.start(audioCtx.currentTime);
+                osc2.stop(audioCtx.currentTime + 0.85);
+            } catch (e) {}
+            
+            // Swap classes at the solid canvas peak (100ms) to sync with staggered transitions
+            setTimeout(() => {
+                if (isCurrentlyDark) {
+                    body.classList.remove("dark-mode");
+                    body.classList.add("light-mode");
+                    localStorage.setItem("dashboard_theme", "light");
+                } else {
+                    body.classList.remove("light-mode");
+                    body.classList.add("dark-mode");
+                    localStorage.setItem("dashboard_theme", "dark");
+                }
+                updateUnitsDisplay();
+            }, 100);
+            
+            // Reset and clean animating class after final wave finishes (900ms)
+            setTimeout(() => {
+                container.classList.remove("animating");
+            }, 900);
         } else {
-            body.classList.remove("light-mode");
-            body.classList.add("dark-mode");
-            localStorage.setItem("dashboard_theme", "dark");
+            // Desktop instant switch (coordinated with pull-cord string transitions)
+            if (isCurrentlyDark) {
+                body.classList.remove("dark-mode");
+                body.classList.add("light-mode");
+                localStorage.setItem("dashboard_theme", "light");
+            } else {
+                body.classList.remove("light-mode");
+                body.classList.add("dark-mode");
+                localStorage.setItem("dashboard_theme", "dark");
+            }
+            updateUnitsDisplay();
         }
     }
 

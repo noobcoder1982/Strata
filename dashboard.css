@@ -345,6 +345,14 @@ body.light-mode .bento-card:hover {
     display: none !important;
 }
 
+.mobile-header-bar {
+    display: none !important;
+}
+
+.mobile-theme-wave-container {
+    display: none !important;
+}
+
 
 .bento-card-header {
     display: flex;
@@ -707,7 +715,22 @@ body.light-mode .icon-cloud-dark {
 }
 
 @media (max-width: 768px) {
-    
+    body.dark-mode {
+        --bg-color: #000000 !important;
+        --accent-color: #0066ff !important;
+        --accent-bg: rgba(0, 102, 255, 0.12) !important;
+        --card-bg: rgba(12, 13, 16, 0.85) !important;
+        --card-border: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    body.light-mode {
+        --bg-color: #e2e0d8 !important;
+        --accent-color: #ff6600 !important;
+        --accent-bg: rgba(255, 102, 0, 0.08) !important;
+        --card-bg: rgba(255, 255, 255, 0.65) !important;
+        --card-border: rgba(21, 21, 21, 0.12) !important;
+    }
+
     .pull-cord-container {
         display: none !important;
     }
@@ -715,334 +738,146 @@ body.light-mode .icon-cloud-dark {
     body {
         background-color: var(--bg-color);
         padding: 0 !important;
-        overflow: hidden !important; 
-        height: 100vh !important;
-        height: 100dvh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        display: block !important;
     }
 
-    
-    .bento-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        grid-template-rows: auto auto auto repeat(3, 1fr) auto !important;
-        align-content: space-between !important;
-        padding: 16px 20px 10px 20px !important;
-        gap: 8px 16px !important;
-        width: 100% !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important; 
+    @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.45; transform: scale(0.85); }
     }
 
-    
-    .bento-card {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        transform: none !important;
-        border-radius: 0 !important;
-    }
-    
-    .bento-card:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    
-    .main-status-card {
-        order: 1;
-        grid-column: span 2 !important;
-        margin-bottom: 0 !important;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
-
-    .main-status-card .header-block {
-        width: 100%;
-        gap: 4px;
-    }
-
-    .main-status-card .location-wrapper {
-        display: flex;
+    /* Cyber-Brutalist Mobile Header Bar */
+    .mobile-header-bar {
+        display: flex !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 64px;
+        background: var(--bg-color) !important;
+        border-bottom: 2.5px solid var(--text-color) !important;
+        z-index: 9998 !important;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        padding: 0 16px;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
     }
-
-    .main-status-card .location-title {
-        font-size: 1.5rem;
-        font-weight: 500;
-        letter-spacing: -0.5px;
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .mobile-brand-sans {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: 2px;
         color: var(--text-color);
     }
-
-    .main-status-card .change-location-btn {
-        padding: 4px 10px;
-        font-size: 0.72rem;
-        border-radius: 12px;
+    .mobile-brand-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--accent-color) !important;
+        border-radius: 0%;
+        box-shadow: 1.5px 1.5px 0px var(--text-color);
     }
-
-    .main-status-card .current-date {
-        font-size: 0.82rem;
-        color: var(--label-color);
-    }
-
-    .main-status-card .welcome-user-tag {
-        display: none !important; 
-    }
-
-    
-    .main-status-card .temp-wrapper {
-        margin-top: 4px;
-        align-items: flex-start;
-    }
-
-    .main-status-card .temp-number {
-        font-size: 5rem;
-        font-weight: 700;
-        letter-spacing: -2px;
-        line-height: 0.9;
-    }
-
-    
-    .main-status-card .temp-toggle-container {
-        margin-top: 6px;
-        margin-left: 8px;
-        gap: 4px;
-    }
-
-    .main-status-card .temp-toggle-btn {
-        font-size: 1.5rem;
-    }
-
-    .main-status-card .temp-divider {
-        font-size: 1.2rem;
-    }
-
-    
-    .forecast-timeline-card {
-        order: 2;
-        grid-column: span 2 !important;
-        margin-bottom: 0 !important;
-        width: 100%;
-    }
-
-    
-    .forecast-timeline-card .bento-card-header {
-        display: none !important;
-    }
-
-    
-    .forecast-row {
-        display: flex !important;
-        overflow-x: auto !important;
-        gap: 16px !important;
-        padding-bottom: 4px !important;
-        margin-top: 0 !important;
-        width: 100%;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; 
-    }
-    
-    .forecast-row::-webkit-scrollbar {
-        display: none;
-    }
-
-    .forecast-item {
-        flex: 0 0 auto;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
+    .mobile-status-pill {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        min-width: 52px !important;
+        border: 1.5px solid var(--text-color) !important;
+        padding: 4px 8px;
+        border-radius: 6px;
+        box-shadow: 2px 2px 0px var(--text-color);
+        margin-right: auto;
+        margin-left: 12px;
     }
-
-    .forecast-item .fc-time {
-        font-size: 0.75rem;
-        color: var(--label-color);
-        margin-bottom: 2px;
+    @media (max-width: 380px) {
+        .mobile-status-pill {
+            display: none !important;
+        }
     }
-
-    .forecast-item .fc-day {
-        display: none !important; 
+    .mobile-status-pulse {
+        width: 5px;
+        height: 5px;
+        background: #10b981;
+        border-radius: 0%;
+        box-shadow: 0 0 4px #10b981;
+        animation: pulse 2s infinite;
     }
-
-    .forecast-item .fc-icon {
-        width: 22px;
-        height: 22px;
-        margin: 2px 0 !important;
-    }
-
-    .forecast-item .fc-temps {
-        font-size: 0.85rem;
-        font-weight: 500;
+    .mobile-status-text {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 1px;
         color: var(--text-color);
     }
 
-    .forecast-item .fc-low {
-        display: none !important; 
-    }
-
-    
-    .sun-card { order: 3; grid-column: span 2 !important; }
-    .feels-card { order: 4; grid-column: span 1 !important; }
-    .wind-card { order: 5; grid-column: span 1 !important; }
-    .humidity-card { order: 6; grid-column: span 1 !important; }
-    .pressure-card { order: 7; grid-column: span 1 !important; }
-    .visibility-card { order: 8; grid-column: span 1 !important; }
-    .uv-card { order: 9; grid-column: span 1 !important; }
-
-    
-    .sun-card,
-    .feels-card,
-    .wind-card,
-    .humidity-card,
-    .pressure-card,
-    .visibility-card,
-    .uv-card {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: flex-start !important;
-        float: none !important; 
-        width: auto !important;
-        margin-bottom: 0 !important; 
-        box-sizing: border-box;
-    }
-
-    
-    .bento-card-header {
-        margin-bottom: 1px !important;
-    }
-
-    .bento-card-header .bento-icon {
-        display: none !important; 
-    }
-
-    .bento-card-header .bento-label {
-        font-size: 0.78rem !important;
-        font-weight: 400 !important;
-        text-transform: capitalize !important;
-        letter-spacing: 0 !important;
-        color: var(--label-color);
-    }
-
-    
-    .bento-value {
-        font-size: 1.05rem !important;
-        font-weight: 500 !important;
-        color: var(--text-color);
-        margin-top: 1px;
-    }
-
-    .bento-unit {
-        font-size: 1.05rem !important;
-        font-weight: 500 !important;
-        color: var(--text-color);
-    }
-
-    
-    .sun-card .bento-card-header {
-        display: none !important; 
-    }
-
-    .sun-split-values {
-        display: flex;
-        width: 100%;
-        gap: 0;
-        margin-top: 0;
-    }
-
-    .sun-metric {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-    }
-
-    .sun-label {
-        font-size: 0.78rem;
-        font-weight: 400;
-        text-transform: capitalize;
-        color: var(--label-color);
-    }
-
-    .sun-value {
-        font-size: 1.05rem;
-        font-weight: 500;
-        color: var(--text-color);
-    }
-
-    
-    .mobile-daily-card {
-        order: 10;
-        grid-column: span 2 !important;
-        display: block !important;
-        width: 100% !important;
-        clear: both;
-        margin-top: 0 !important;
-        border-top: 1px solid var(--btn-border) !important;
-        padding-top: 8px !important;
-    }
-
-    .mobile-daily-row {
-        display: flex !important;
-        overflow-x: auto !important;
-        gap: 20px !important;
-        padding-bottom: 2px !important;
-        width: 100%;
-        scrollbar-width: none;
-    }
-
-    .mobile-daily-row::-webkit-scrollbar {
-        display: none;
-    }
-
-    .mobile-daily-item {
-        flex: 0 0 auto;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        min-width: 52px !important;
-    }
-
-    
+    /* Fixed top actions in header */
     .logout-btn {
-        position: absolute;
-        top: 24px;
-        right: 20px;
+        position: fixed !important;
+        top: 14px !important;
+        right: 16px !important;
         left: auto !important;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 8px !important;
+        z-index: 10001 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background: var(--bg-color) !important;
+        border: 2px solid var(--text-color) !important;
+        color: var(--text-color) !important;
+        margin: 0 !important;
+        box-shadow: 2.5px 2.5px 0px var(--text-color) !important;
+        transition: all 0.15s ease !important;
+    }
+    .logout-btn:active {
+        transform: translate(1.5px, 1.5px) !important;
+        box-shadow: 1px 1px 0px var(--text-color) !important;
+    }
+    .logout-btn:hover {
+        background: rgba(239, 68, 68, 0.1) !important;
+        color: #ef4444 !important;
+        border-color: #ef4444 !important;
+        box-shadow: 2.5px 2.5px 0px #ef4444 !important;
     }
 
-    
     .mobile-theme-btn {
         display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: var(--btn-bg);
-        border: 1px solid var(--btn-border);
-        color: var(--text-color);
-        cursor: pointer;
-        padding: 0;
-        transition: var(--theme-transition);
-        margin-left: 8px;
+        position: fixed !important;
+        top: 14px !important;
+        right: 60px !important;
+        left: auto !important;
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 8px !important;
+        z-index: 10001 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background: var(--bg-color) !important;
+        border: 2px solid var(--text-color) !important;
+        color: var(--text-color) !important;
+        margin: 0 !important;
+        box-shadow: 2.5px 2.5px 0px var(--text-color) !important;
+        transition: all 0.15s ease !important;
     }
-    
+    .mobile-theme-btn:active {
+        transform: translate(1.5px, 1.5px) !important;
+        box-shadow: 1px 1px 0px var(--text-color) !important;
+    }
+    .mobile-theme-btn:hover {
+        background: var(--accent-bg) !important;
+        color: var(--accent-color) !important;
+        border-color: var(--accent-color) !important;
+        box-shadow: 2.5px 2.5px 0px var(--accent-color) !important;
+    }
     body.dark-mode .mobile-theme-btn .sun-icon {
         display: block !important;
     }
@@ -1055,31 +890,608 @@ body.light-mode .icon-cloud-dark {
     body.light-mode .mobile-theme-btn .moon-icon {
         display: block !important;
     }
-}
 
-
-@media (max-width: 768px) and (max-height: 680px) {
+    /* Grid Layout */
     .bento-grid {
-        gap: 6px 12px !important;
-        padding: 10px 16px 6px 16px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+        padding: 80px 14px 40px 14px !important;
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        overflow: visible !important;
     }
-    
+
+    /* Semi-Brutalist Bento Card Base */
+    .bento-card {
+        background: var(--card-bg) !important;
+        border: 2px solid var(--text-color) !important;
+        border-radius: 16px !important;
+        padding: 20px 16px !important;
+        box-shadow: 4px 4px 0px var(--text-color) !important;
+        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        height: auto !important;
+        min-height: 110px !important;
+        opacity: 1 !important;
+        transition: all 0.2s ease !important;
+        animation: none !important;
+    }
+
+    /* Main Status Card Styles */
+    .main-status-card {
+        grid-column: span 2 !important;
+        padding: 24px 20px !important;
+        min-height: 210px !important;
+        order: 1;
+    }
+    .main-status-card .header-block {
+        gap: 6px !important;
+    }
+    .main-status-card .location-wrapper {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 8px !important;
+        flex-wrap: nowrap !important;
+    }
+    .main-status-card .location-title {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 1.55rem !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.5px !important;
+        color: var(--text-color) !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 65% !important;
+    }
+    .main-status-card .change-location-btn {
+        padding: 6px 12px !important;
+        font-size: 0.75rem !important;
+        border-radius: 8px !important;
+        border: 2px solid var(--text-color) !important;
+        background: var(--bg-color) !important;
+        color: var(--text-color) !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-weight: 700 !important;
+        box-shadow: 2px 2px 0px var(--text-color) !important;
+        transition: all 0.15s ease !important;
+    }
+    .main-status-card .change-location-btn:hover {
+        background: var(--accent-bg) !important;
+        border-color: var(--accent-color) !important;
+        box-shadow: 2px 2px 0px var(--accent-color) !important;
+    }
+    .main-status-card .change-location-btn:active {
+        transform: translate(1.5px, 1.5px) !important;
+        box-shadow: 0.5px 0.5px 0px var(--accent-color) !important;
+    }
+    .main-status-card .current-date {
+        font-size: 0.88rem !important;
+        margin-top: 4px !important;
+        margin-bottom: 2px !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+    .main-status-card .welcome-user-tag {
+        display: inline-block !important;
+        font-size: 0.65rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        color: var(--text-color) !important;
+        background: transparent !important;
+        border: 1.5px solid var(--text-color) !important;
+        padding: 3px 8px !important;
+        border-radius: 6px !important;
+        align-self: flex-start !important;
+        margin-top: 4px !important;
+        box-shadow: 2px 2px 0px var(--text-color) !important;
+    }
+
+    .main-status-card .temp-wrapper {
+        margin-top: 24px !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+    }
     .main-status-card .temp-number {
-        font-size: 4rem !important;
+        font-size: 5.5rem !important;
+        font-weight: 700 !important;
+        letter-spacing: -3px !important;
+        line-height: 0.85 !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        text-shadow: none !important;
     }
-    
-    .mobile-daily-card {
-        padding-top: 4px !important;
+
+    /* Segmented Pill Temp Toggle Switch */
+    .main-status-card .temp-toggle-container {
+        margin-top: 8px !important;
+        margin-left: 0 !important;
+        gap: 0 !important;
+        background: rgba(0, 0, 0, 0.08) !important;
+        border: 2px solid var(--text-color) !important;
+        border-radius: 12px !important;
+        padding: 2px !important;
+        box-shadow: 2px 2px 0px var(--text-color) !important;
     }
-    
-    .bento-card-header .bento-label,
-    .sun-label {
-        font-size: 0.72rem !important;
+    body.light-mode .main-status-card .temp-toggle-container {
+        background: rgba(255, 255, 255, 0.5) !important;
     }
-    
-    .bento-value,
-    .sun-value {
+    .main-status-card .temp-toggle-btn {
         font-size: 0.95rem !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-weight: 600 !important;
+        padding: 6px 14px !important;
+        border-radius: 8px !important;
+        border: none !important;
+        background: transparent !important;
+        color: var(--label-color) !important;
+        transition: all 0.15s ease !important;
+    }
+    .main-status-card .temp-toggle-btn.active {
+        background: var(--accent-color) !important;
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        box-shadow: none !important;
+    }
+    .main-status-card .temp-divider {
+        display: none !important;
+    }
+
+    /* Hourly Forecast Track */
+    .forecast-timeline-card {
+        grid-column: span 2 !important;
+        padding: 20px 16px !important;
+        order: 2;
+    }
+    .forecast-timeline-card .bento-card-header {
+        display: flex !important;
+        margin-bottom: 14px !important;
+    }
+    .forecast-row {
+        display: flex !important;
+        overflow-x: auto !important;
+        gap: 12px !important;
+        padding-bottom: 8px !important;
+        margin-top: 0 !important;
+        width: 100% !important;
+        scrollbar-width: none;
+    }
+    .forecast-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Brutalist Mini Items */
+    .forecast-item {
+        flex: 0 0 74px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 8px !important;
+        background: var(--bg-color) !important;
+        border: 2px solid var(--text-color) !important;
+        border-radius: 10px !important;
+        min-width: 74px !important;
+        box-shadow: 2.5px 2.5px 0px var(--text-color) !important;
+        transition: all 0.15s ease !important;
+    }
+    .forecast-item:hover, .forecast-item.active {
+        background: var(--accent-bg) !important;
+        border-color: var(--accent-color) !important;
+        box-shadow: 2.5px 2.5px 0px var(--accent-color) !important;
+    }
+    .forecast-item .fc-time {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        color: var(--label-color) !important;
+        margin-bottom: 4px !important;
+    }
+    .forecast-item .fc-day {
+        display: none !important;
+    }
+    .forecast-item .fc-icon {
+        width: 28px !important;
+        height: 28px !important;
+        margin: 4px 0 !important;
+    }
+    .forecast-item .fc-temps {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
+        color: var(--text-color) !important;
+    }
+    .forecast-item .fc-low {
+        display: none !important;
+    }
+
+    /* Daily Forecast Block */
+    .mobile-daily-card {
+        grid-column: span 2 !important;
+        display: block !important;
+        padding: 20px 16px !important;
+        order: 3;
+    }
+    .mobile-daily-card::before {
+        content: 'ATMOSPHERIC TRENDS (DAILY FORECAST)';
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--label-color);
+        margin-bottom: 14px;
+    }
+    .mobile-daily-row {
+        display: flex !important;
+        overflow-x: auto !important;
+        gap: 12px !important;
+        padding-bottom: 8px !important;
+        width: 100% !important;
+        scrollbar-width: none;
+    }
+    .mobile-daily-row::-webkit-scrollbar {
+        display: none;
+    }
+    .mobile-daily-item {
+        flex: 0 0 94px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 14px 8px !important;
+        background: var(--bg-color) !important;
+        border: 2px solid var(--text-color) !important;
+        border-radius: 10px !important;
+        min-width: 94px !important;
+        box-shadow: 2.5px 2.5px 0px var(--text-color) !important;
+        transition: all 0.15s ease !important;
+    }
+    .mobile-daily-item:hover {
+        background: var(--accent-bg) !important;
+        border-color: var(--accent-color) !important;
+        box-shadow: 2.5px 2.5px 0px var(--accent-color) !important;
+    }
+    .mobile-daily-item .fc-time {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.72rem !important;
+        color: var(--label-color) !important;
+        margin-bottom: 6px !important;
+        font-weight: 700 !important;
+    }
+    .mobile-daily-item .fc-temps {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        color: var(--text-color) !important;
+    }
+
+    /* Astronomical Cycle block */
+    .sun-card {
+        grid-column: span 2 !important;
+        min-height: 120px !important;
+        order: 4;
+    }
+    .sun-card .bento-card-header {
+        display: flex !important;
+        margin-bottom: 12px !important;
+    }
+    .sun-split-values {
+        display: flex !important;
+        width: 100% !important;
+        gap: 16px !important;
+        margin-top: 8px !important;
+    }
+    .sun-metric {
+        width: 50% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1.5px solid var(--text-color);
+        padding: 8px 12px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 0px var(--text-color);
+    }
+    body.light-mode .sun-metric {
+        background: rgba(255, 255, 255, 0.4);
+    }
+    .sun-label {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.68rem !important;
+        font-weight: 650;
+        color: var(--label-color) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+    .sun-value {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 1.05rem !important;
+        font-weight: 750;
+        color: var(--text-color) !important;
+    }
+
+    /* Minor Metrics block */
+    .feels-card { order: 5; grid-column: span 1 !important; }
+    .uv-card { order: 6; grid-column: span 1 !important; }
+    .wind-card { order: 7; grid-column: span 1 !important; }
+    .humidity-card { order: 8; grid-column: span 1 !important; }
+    .pressure-card { order: 9; grid-column: span 1 !important; }
+    .visibility-card { order: 10; grid-column: span 1 !important; }
+
+    .feels-card, .uv-card, .wind-card, .humidity-card, .pressure-card, .visibility-card {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        min-height: 105px !important;
+    }
+    .bento-card-header {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        margin-bottom: 8px !important;
+    }
+    .bento-card-header .bento-icon {
+        display: inline-block !important;
+        width: 13px !important;
+        height: 13px !important;
+        color: var(--label-color) !important;
+    }
+    .bento-card-header .bento-label {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.65rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8px !important;
+    }
+    .bento-value {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        color: var(--text-color) !important;
+        margin-top: auto !important;
+        line-height: 1.15 !important;
+    }
+    .bento-value-wrapper {
+        margin-top: auto !important;
+    }
+    .bento-value-wrapper .bento-value {
+        margin-top: 0 !important;
+    }
+    .bento-unit {
+        font-size: 0.95rem !important;
+    }
+
+    /* Semi-Brutalist Mobile Modal */
+    .location-modal {
+        background: rgba(10, 11, 13, 0.9) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+    .modal-content {
+        background: var(--bg-color) !important;
+        border: 2px solid var(--text-color) !important;
+        border-radius: 16px !important;
+        box-shadow: 6px 6px 0px var(--text-color) !important;
+        padding: 24px 20px !important;
+        width: 92% !important;
+        transform: translateY(20px) scale(0.95) !important;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .location-modal.active .modal-content {
+        transform: translateY(0) scale(1) !important;
+    }
+    .modal-header h2 {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 1.45rem !important;
+        font-weight: 750 !important;
+        color: var(--text-color) !important;
+    }
+    .close-modal-btn {
+        color: var(--text-color) !important;
+        opacity: 0.7;
+    }
+    .modal-search-input {
+        background: rgba(0, 0, 0, 0.05) !important;
+        border: 2px solid var(--text-color) !important;
+        border-radius: 10px !important;
+        color: var(--text-color) !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.95rem !important;
+    }
+    body.light-mode .modal-search-input {
+        background: rgba(255, 255, 255, 0.6) !important;
+    }
+    .modal-result-item {
+        border-radius: 8px !important;
+        transition: all 0.15s ease !important;
+        border: 1.5px solid transparent !important;
+    }
+    .modal-result-item:hover {
+        background: var(--accent-bg) !important;
+        border: 1.5px solid var(--accent-color) !important;
+    }
+    .modal-result-name {
+        color: var(--text-color) !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+    }
+    .modal-result-country {
+        color: var(--label-color) !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+    }
+    .global-search-item {
+        background: var(--accent-bg) !important;
+        border: 1.5px dashed var(--accent-color) !important;
+    }
+
+    /* Cascading Ripple Theme Transition (Gradual Color Shift under Wave) */
+    .main-status-card, .main-status-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.08s !important;
+    }
+    .forecast-timeline-card, .forecast-timeline-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.20s !important;
+    }
+    .mobile-daily-card, .mobile-daily-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.32s !important;
+    }
+    .sun-card, .sun-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.44s !important;
+    }
+    .feels-card, .feels-card *, .uv-card, .uv-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.52s !important;
+    }
+    .wind-card, .wind-card *, .humidity-card, .humidity-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.58s !important;
+    }
+    .pressure-card, .pressure-card *, .visibility-card, .visibility-card * {
+        transition: var(--theme-transition) !important;
+        transition-delay: 0.64s !important;
+    }
+
+    /* Multi-layered Cyber-Brutalist Liquid Wave Transition with Glowing Arc Lines */
+    .mobile-theme-wave-container {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 20002 !important;
+        pointer-events: none !important;
+    }
+
+    .mobile-wave {
+        position: absolute !important;
+        top: -150vh !important;
+        left: 0 !important;
+        width: 100vw !important;
+        pointer-events: none !important;
+        will-change: transform !important;
+        transform: translateY(0) !important;
+        background-size: 100% 200% !important;
+    }
+
+    /* Wave Curves & Sizes - Sleek thick arc energy bands followed by solid block */
+    .mobile-wave.wave-1 {
+        height: 25vh !important; /* Sleek, thick leading energy band */
+        border-bottom-left-radius: 50% 80px !important;
+        border-bottom-right-radius: 50% 80px !important;
+        z-index: 20005 !important;
+        opacity: 0.8 !important; /* Semi-transparent glowing glass panel */
+        animation: gradientTrailShift1 1.2s ease-in-out infinite !important;
+    }
+
+    .mobile-wave.wave-2 {
+        height: 45vh !important; /* Slightly deeper middle band */
+        border-bottom-left-radius: 50% 60px !important;
+        border-bottom-right-radius: 50% 60px !important;
+        z-index: 20004 !important;
+        opacity: 0.92 !important; /* Semi-opaque middle layer */
+        animation: gradientTrailShift2 1.6s ease-in-out infinite !important;
+    }
+
+    .mobile-wave.wave-3 {
+        height: 150vh !important; /* Deep trailing solid block to fully shift background */
+        border-bottom-left-radius: 50% 40px !important;
+        border-bottom-right-radius: 50% 40px !important;
+        z-index: 20003 !important;
+        opacity: 1 !important; /* Fully opaque background sealer */
+        animation: gradientTrailShift3 2.0s ease-in-out infinite !important;
+    }
+
+    /* Cascading Shimmering Gradient Animations */
+    @keyframes gradientTrailShift1 {
+        0% { background-position: 50% 0%; }
+        50% { background-position: 50% 100%; }
+        100% { background-position: 50% 0%; }
+    }
+    @keyframes gradientTrailShift2 {
+        0% { background-position: 50% 100%; }
+        50% { background-position: 50% 0%; }
+        100% { background-position: 50% 100%; }
+    }
+    @keyframes gradientTrailShift3 {
+        0% { background-position: 50% 0%; }
+        50% { background-position: 50% 50%; }
+        100% { background-position: 50% 0%; }
+    }
+
+    /* 1. Transitioning to LIGHT Mode (Warm cream base with rich solar orange thick sweeping arc lines) */
+    .wave-to-light .wave-1 {
+        background: linear-gradient(180deg, rgba(226, 224, 216, 0.2) 0%, rgba(226, 224, 216, 0.65) 60%, rgba(255, 165, 0, 0.85) 90%, #ffa500 100%) !important;
+        border-bottom: 8px solid #ffa500 !important; /* Thick leading orange arc line */
+        box-shadow: 0px 15px 45px rgba(255, 165, 0, 0.6) !important;
+    }
+
+    .wave-to-light .wave-2 {
+        background: linear-gradient(180deg, rgba(226, 224, 216, 0.4) 0%, rgba(226, 224, 216, 0.85) 60%, rgba(255, 102, 0, 0.95) 90%, #ff6600 100%) !important;
+        border-bottom: 5px solid #ff6600 !important; /* Thick middle orange arc line */
+        box-shadow: 0px 15px 35px rgba(255, 102, 0, 0.4) !important;
+    }
+
+    .wave-to-light .wave-3 {
+        background: linear-gradient(180deg, #e2e0d8 0%, #e2e0d8 75%, #ff2200 90%, #ff2200 100%) !important;
+        border-bottom: 2px solid #ff2200 !important;
+        box-shadow: 0px 15px 25px rgba(255, 34, 0, 0.3) !important;
+    }
+
+    /* 2. Transitioning to DARK Mode (Solid pure black with electric cyan/blue thick sweeping arc lines) */
+    .wave-to-dark .wave-1 {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.65) 60%, rgba(0, 242, 254, 0.85) 90%, #00f2fe 100%) !important;
+        border-bottom: 8px solid #00f2fe !important; /* Thick leading cyan arc line */
+        box-shadow: 0px 15px 45px rgba(0, 242, 254, 0.6) !important;
+    }
+
+    .wave-to-dark .wave-2 {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 102, 255, 0.95) 90%, #0066ff 100%) !important;
+        border-bottom: 5px solid #0066ff !important; /* Thick middle blue arc line */
+        box-shadow: 0px 15px 35px rgba(0, 102, 255, 0.4) !important;
+    }
+
+    .wave-to-dark .wave-3 {
+        background: linear-gradient(180deg, #000000 0%, #000000 75%, #0022aa 90%, #0022aa 100%) !important;
+        border-bottom: 2px solid #0022aa !important;
+        box-shadow: 0px 15px 25px rgba(0, 34, 170, 0.3) !important;
+    }
+
+    /* Staggered transition profiles to create dynamic fluid stretching motion */
+    .animating .wave-1 {
+        transition: transform 0.68s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        transform: translateY(250vh) !important;
+    }
+
+    .animating .wave-2 {
+        transition: transform 0.82s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        transform: translateY(250vh) !important;
+    }
+
+    .animating .wave-3 {
+        transition: transform 0.92s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        transform: translateY(250vh) !important;
     }
 }
 

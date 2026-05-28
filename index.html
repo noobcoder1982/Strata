@@ -12,6 +12,47 @@
 </head>
 <body>
     
+    <!-- Sleek Minimal Brutalist Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="pl-center">
+            
+            <!-- Swiss Typography Layout -->
+            <div class="pl-slogan-wrap">
+                <div class="pl-overline">
+                    <span class="pl-overline-tag">[ STRATA SYSTEM LOADING ]</span>
+                    <span class="pl-overline-index">OP.2605</span>
+                </div>
+                <h1 class="pl-slogan">
+                    <span class="pl-slogan-line">
+                        <span class="pl-sans pl-blur-word" style="--wd:0">Experience</span> 
+                        <span class="pl-serif pl-blur-word" style="--wd:1">weather</span>,
+                    </span>
+                    <span class="pl-slogan-line">
+                        <span class="pl-sans pl-blur-word" style="--wd:2">refined</span> 
+                        <span class="pl-sans pl-blur-word" style="--wd:3">to</span> 
+                        <span class="pl-sans pl-blur-word" style="--wd:4">an</span> 
+                        <span class="pl-serif pl-blur-word" style="--wd:5">art</span>.
+                    </span>
+                </h1>
+            </div>
+            
+            <!-- Horizontal Progress Box (At exact vertical center seam, spanning full 100vw) -->
+            <div class="pl-progress-box">
+                <!-- Floating percentage counter that moves along the line -->
+                <div class="pl-floating-counter" id="pl-pct-wrapper">
+                    <span id="pl-pct">0</span><span class="pl-pct-sign">%</span>
+                </div>
+                <!-- Double Progress Line Track (Splits on exit) -->
+                <div class="pl-line-track">
+                    <div class="pl-track-top"></div>
+                    <div class="pl-track-bottom"></div>
+                    <div class="pl-line-fill pl-line-top" id="pl-line-top"></div>
+                    <div class="pl-line-fill pl-line-bottom" id="pl-line-bottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="landing-screen" id="landing-screen">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -37,11 +78,18 @@
                 </span>
             </h1>
             <p class="hero-subtitle">
-                <span class="subtitle-word" style="--d:0">Editorial-grade</span>
-                <span class="subtitle-word" style="--d:1">meteorological</span>
-                <span class="subtitle-word" style="--d:2">precision,</span>
-                <span class="subtitle-word" style="--d:3">rendered</span>
-                <span class="subtitle-word" style="--d:4">beautifully.</span>
+                <span class="hero-sub-line">
+                    <span class="hero-sans hero-blur-word" style="--d:0">Editorial-grade</span> 
+                    <span class="hero-serif hero-blur-word" style="--d:1">atmospheric</span> 
+                    <span class="hero-sans hero-blur-word" style="--d:2">precision,</span>
+                </span>
+                <span class="hero-sub-line">
+                    <span class="hero-sans hero-blur-word" style="--d:3">rendered</span> 
+                    <span class="hero-sans hero-blur-word" style="--d:4">beautifully</span> 
+                    <span class="hero-sans hero-blur-word" style="--d:5">as</span> 
+                    <span class="hero-serif hero-blur-word" style="--d:6">architectural</span> 
+                    <span class="hero-serif hero-blur-word" style="--d:7">art</span>.
+                </span>
             </p>
             <button class="hero-cta" id="start-setup-btn">
                 <span class="cta-text">Begin Calibration</span>
@@ -142,7 +190,19 @@
                 <span class="m-overline-text">ATMOSPHERIC OBSERVATORY</span>
             </div>
             <h1 class="m-title">METEOROLOGICAL<br><em>INTELLIGENCE</em></h1>
-            <p class="m-subtitle">Precision atmospheric telemetry and hyper-precise sensor rendering. Curated for structural elegance.</p>
+            <p class="m-subtitle">
+                <span class="m-sub-line">
+                    <span class="m-sans m-blur-word" style="--d:0">Precision</span> 
+                    <span class="m-serif m-blur-word" style="--d:1">atmospheric</span> 
+                    <span class="m-sans m-blur-word" style="--d:2">telemetry</span>
+                </span>
+                <span class="m-sub-line">
+                    <span class="m-sans m-blur-word" style="--d:3">refined</span> 
+                    <span class="m-sans m-blur-word" style="--d:4">for</span> 
+                    <span class="m-serif m-blur-word" style="--d:5">architectural</span> 
+                    <span class="m-serif m-blur-word" style="--d:6">elegance</span>.
+                </span>
+            </p>
             
             <button class="m-cta" onclick="document.getElementById('mobile-landing').classList.add('fade-out'); document.getElementById('start-setup-btn').click();">
                 <span class="m-cta-blur"></span>
@@ -288,6 +348,77 @@
     <script src="script.js"></script>
     <script>
     (function() {
+        // ── Stark Minimalist Preloader Logic ─────────────────────────────────
+        const preloader     = document.getElementById('preloader');
+        const plPct         = document.getElementById('pl-pct');
+        const plPctWrapper  = document.getElementById('pl-pct-wrapper');
+        const plLineTop     = document.getElementById('pl-line-top');
+        const plLineBottom  = document.getElementById('pl-line-bottom');
+
+        if (preloader) {
+            const DURATION = 2200;
+            const startTime = performance.now();
+
+            function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+            function tick(now) {
+                const raw   = Math.min((now - startTime) / DURATION, 1);
+                const eased = easeOutCubic(raw);
+                const pct   = Math.floor(eased * 100);
+
+                if (plPct)        plPct.textContent = pct;
+                if (plLineTop)    plLineTop.style.width = pct + '%';
+                if (plLineBottom) plLineBottom.style.width = pct + '%';
+                if (plPctWrapper) {
+                    const widthVal = window.innerWidth;
+                    const leftPx = (pct / 100) * widthVal;
+                    // Clamp between 36px and (widthVal - 36px) so numbers never get clipped at screen borders
+                    const margin = 36;
+                    const clampedLeft = Math.max(margin, Math.min(widthVal - margin, leftPx));
+                    plPctWrapper.style.left = clampedLeft + 'px';
+                    plPctWrapper.style.transform = `translateX(-50%)`;
+                }
+
+                if (raw < 1) {
+                    requestAnimationFrame(tick);
+                } else {
+                    // Trigger the sliding blur-out exit of the counter
+                    if (plPctWrapper) {
+                        plPctWrapper.classList.add('pl-pct-exit');
+                    }
+
+                    // Completion chime
+                    try {
+                        const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc  = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.connect(gain); gain.connect(ctx.destination);
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(300, ctx.currentTime);
+                        osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.3);
+                        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+                        osc.start(ctx.currentTime);
+                        osc.stop(ctx.currentTime + 0.45);
+                    } catch(e) {}
+
+                    // Stagger the split exit to wait for the 100% counter to fade out gracefully
+                    setTimeout(() => {
+                        preloader.classList.add('pl-exit');
+                        
+                        // React landing screens exactly as curtains split
+                        const ls = document.getElementById('landing-screen');
+                        if (ls) ls.classList.add('active');
+                        const mls = document.getElementById('mobile-landing');
+                        if (mls) mls.classList.add('active');
+
+                        setTimeout(() => { preloader.style.display = 'none'; }, 900);
+                    }, 400);
+                }
+            }
+            requestAnimationFrame(tick);
+        }
+
         // Live Clock
         function updateClock() {
             const now = new Date();

@@ -324,7 +324,10 @@ function toggleDropdown(dropdown) {
         if (searchInput) {
             setTimeout(() => {
                 searchInput.value = "";
-                searchInput.focus();
+                // Only focus on desktop to prevent soft-keyboard popup from cramping mobile viewports
+                if (window.innerWidth > 768) {
+                    searchInput.focus();
+                }
                 
                 filterOptions(dropdown.querySelector(".dropdown-options"), "");
             }, 50);
@@ -581,10 +584,8 @@ function setupLandingTransition() {
             landing.style.display = "none";
             splitContainer.classList.add("active");
             
+            // Removed auto-focus to prevent keyboard from popping up immediately on load
             const usernameInput = document.getElementById("username");
-            if (usernameInput) {
-                usernameInput.focus();
-            }
         }, 800);
     }
 
